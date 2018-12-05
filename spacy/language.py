@@ -32,6 +32,8 @@ from .errors import Errors
 from . import util
 from . import about
 
+from .lang.pl.tagger import PolishTagger
+
 
 class BaseDefaults(object):
     @classmethod
@@ -101,7 +103,7 @@ class Language(object):
     factories = {
         'tokenizer': lambda nlp: nlp.Defaults.create_tokenizer(nlp),
         'tensorizer': lambda nlp, **cfg: Tensorizer(nlp.vocab, **cfg),
-        'tagger': lambda nlp, **cfg: Tagger(nlp.vocab, **cfg),
+        'tagger': lambda nlp, **cfg: PolishTagger(nlp.vocab, **cfg),
         'parser': lambda nlp, **cfg: DependencyParser(nlp.vocab, **cfg),
         'ner': lambda nlp, **cfg: EntityRecognizer(nlp.vocab, **cfg),
         'similarity': lambda nlp, **cfg: SimilarityHook(nlp.vocab, **cfg),

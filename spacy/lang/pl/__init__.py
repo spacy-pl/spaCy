@@ -13,6 +13,7 @@ from ..norm_exceptions import BASE_NORMS
 from ...language import Language
 from ...attrs import LANG, NORM
 from ...util import update_exc, add_lookups
+from ...symbols import POS, PUNCT
 
 
 class PolishDefaults(Language.Defaults):
@@ -23,6 +24,7 @@ class PolishDefaults(Language.Defaults):
     tokenizer_exceptions = update_exc(BASE_EXCEPTIONS, TOKENIZER_EXCEPTIONS)
     infixes = tuple(TOKENIZER_INFIXES)
     stop_words = STOP_WORDS
+    tag_map = {"*": {POS: PUNCT, "PunctType": "peri"}}
 
     @classmethod
     def create_lemmatizer(cls, nlp=None):
