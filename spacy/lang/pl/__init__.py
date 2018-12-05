@@ -5,6 +5,8 @@ from .tokenizer_exceptions import TOKENIZER_EXCEPTIONS
 from .stop_words import STOP_WORDS
 from .lex_attrs import LEX_ATTRS
 from .punctuation import TOKENIZER_INFIXES
+from .lemmatizer import LEMMA_RULES, LEMMA_INDEX, LEMMA_EXC
+from .lemmatizer.lemmatizer import PolishLemmatizer
 
 from ..tokenizer_exceptions import BASE_EXCEPTIONS
 from ..norm_exceptions import BASE_NORMS
@@ -21,6 +23,14 @@ class PolishDefaults(Language.Defaults):
     tokenizer_exceptions = update_exc(BASE_EXCEPTIONS, TOKENIZER_EXCEPTIONS)
     infixes = tuple(TOKENIZER_INFIXES)
     stop_words = STOP_WORDS
+
+    @classmethod
+    def create_lemmatizer(cls, nlp=None):
+        lemma_rules = LEMMA_RULES
+        lemma_index = LEMMA_INDEX
+        lemma_exc = LEMMA_EXC
+        return PolishLemmatizer(index=lemma_index, exceptions=lemma_exc,
+                                rules=lemma_rules)
 
 
 class Polish(Language):
