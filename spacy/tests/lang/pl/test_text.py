@@ -1,5 +1,5 @@
 # coding: utf-8
-"""Words like numbers are recognized correctly."""
+"""Test that longer and mixed texts are tokenized correctly."""
 
 
 from __future__ import unicode_literals
