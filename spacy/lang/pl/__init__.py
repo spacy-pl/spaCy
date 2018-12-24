@@ -7,6 +7,7 @@ from .lex_attrs import LEX_ATTRS
 from .punctuation import TOKENIZER_INFIXES
 from .lemmatizer import LEMMA_RULES, LEMMA_INDEX, LEMMA_EXC
 from .lemmatizer.lemmatizer import PolishLemmatizer
+from .tagger import PolishTagger
 
 from ..tokenizer_exceptions import BASE_EXCEPTIONS
 from ..norm_exceptions import BASE_NORMS
