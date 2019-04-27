@@ -1,7 +1,4 @@
-import string
-
-charset = string.ascii_lowercase + "ąężźćńółęąś"
-ALPHABET_SIZE = len(charset)
+# coding: utf-8
 
 
 class Trie:
