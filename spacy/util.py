@@ -707,6 +707,18 @@ def get_serialization_exclude(serializers, exclude, kwargs):
     return exclude
 
 
+def load_resource(path, name):
+    """Load resource from messagepack format when available,
+    or jsonl resource when not messagepack format not available"""
+    msgpack_path = os.path.join(path, '{}.msg'.format(name))
+    jsonl_path = os.path.join(path, '{}.jsonl'.format(name))
+    try:
+        resource = srsly.read_msgpack(msgpack_path)
+    except ValueError:
+        resource = srsly.read_jsonl(jsonl_path)
+    return resource
+
+
 class SimpleFrozenDict(dict):
     """Simplified implementation of a frozen dict, mainly used as default
     function or method argument (for arguments that should default to empty

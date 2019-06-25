@@ -1,18 +1,21 @@
 # coding: utf8
 from __future__ import unicode_literals
 
-from ._adjectives import ADJECTIVES
-from ._adverbs import ADVERBS
-from ._nouns import NOUNS
-from ._participles import PARTICIPLES
-from ._verbs import VERBS
-from ._other import OTHER
+from ....util import load_resource
 
-from ._adjective_rules import ADJECTIVE_RULES
-from ._adverb_rules import ADVERB_RULES
-from ._noun_rules import NOUN_RULES
-from ._participle_rules import PARTICIPLE_RULES
-from ._verb_rules import VERB_RULES
+
+ADJECTIVES = load_resource('./', 'adj')
+ADVERBS = load_resource('./', 'adv')
+NOUNS = load_resource('./', 'noun')
+PARTICIPLES = load_resource('./', 'part')
+VERBS = load_resource('./', 'verb')
+OTHER = load_resource('./', 'other')
+
+ADJECTIVE_RULES = load_resource('./', 'adj_rules')
+ADVERB_RULES = load_resource('./', 'adv_rules')
+NOUN_RULES = load_resource('./', 'noun_rules')
+PARTICIPLE_RULES = load_resource('./', 'part_rules')
+VERB_RULES = load_resource('./', 'verb_rules')
 # from ._other_rules import OTHER_RULES
 
 
