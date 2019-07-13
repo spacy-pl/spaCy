@@ -10,6 +10,7 @@ from distutils.sysconfig import get_python_inc
 import distutils.util
 from distutils import ccompiler, msvccompiler
 from setuptools import Extension, setup, find_packages
+import srsly
 
 
 def is_new_osx():
@@ -75,6 +76,19 @@ COMPILE_OPTIONS = {
 
 LINK_OPTIONS = {"msvc": [], "mingw32": [], "other": []}
 
+JSONL_DATA_TO_CONVERT=[
+    "lang/pl/lemmatizer/adjective_rules.jsonl",
+    "lang/pl/lemmatizer/adjectives.jsonl",
+    "lang/pl/lemmatizer/adverb_rules.jsonl",
+    "lang/pl/lemmatizer/adverbs.jsonl",
+    "lang/pl/lemmatizer/noun_rules.jsonl",
+    "lang/pl/lemmatizer/nouns.jsonl",
+    "lang/pl/lemmatizer/participle_rules.jsonl",
+    "lang/pl/lemmatizer/participles.jsonl",
+    "lang/pl/lemmatizer/verb_rules.jsonl",
+    "lang/pl/lemmatizer/verbs.jsonl",
+    "lang/pl/lemmatizer/other.jsonl",
+]
 
 if is_new_osx():
     # On Mac, use libc++ because Apple deprecated use of
@@ -156,6 +170,15 @@ def chdir(new_dir):
         del sys.path[0]
         os.chdir(old_dir)
 
+def binarize_jsonl_data(root, files):
+    """Converting jsonl language data to messagepack files to reduce package size"""
+    for filename in files:
+        assert(filename.endswith(".jsonl"))
+        input_filepath = os.path.join(root, filename)
+        output_filepath = os.path.join(root, filename[:-6].append(".msg"))
+
+        data = list(srsly.read_jsonl(input_filepath))
+        srsly.write_msgpack(output_filepath, data)
 
 def setup_package():
     root = os.path.abspath(os.path.dirname(__file__))
@@ -207,6 +230,7 @@ def setup_package():
 
         if not is_source_release(root):
             generate_cython(root, "spacy")
+            binarize_jsonl_data(root, JSONL_DATA_TO_CONVERT)
 
         setup(
             name=about["__title__"],
