@@ -4,19 +4,18 @@ from __future__ import unicode_literals
 from ....util import load_resource
 
 
-ADJECTIVES = load_resource('./', 'adj')
-ADVERBS = load_resource('./', 'adv')
-NOUNS = load_resource('./', 'noun')
-PARTICIPLES = load_resource('./', 'part')
-VERBS = load_resource('./', 'verb')
-OTHER = load_resource('./', 'other')
+ADJECTIVES = set(load_resource('./', 'adjectives'))
+ADVERBS = set(load_resource('./', 'adverbs'))
+NOUNS = set(load_resource('./', 'nouns'))
+PARTICIPLES = set(load_resource('./', 'pariciples'))
+VERBS = set(load_resource('./', 'verbs'))
+OTHER = set(load_resource('./', 'other'))
 
-ADJECTIVE_RULES = load_resource('./', 'adj_rules')
-ADVERB_RULES = load_resource('./', 'adv_rules')
-NOUN_RULES = load_resource('./', 'noun_rules')
-PARTICIPLE_RULES = load_resource('./', 'part_rules')
-VERB_RULES = load_resource('./', 'verb_rules')
-# from ._other_rules import OTHER_RULES
+ADJECTIVE_RULES = list(load_resource('./', 'adj_rules'))
+ADVERB_RULES = list(load_resource('./', 'adv_rules'))
+NOUN_RULES = list(load_resource('./', 'noun_rules'))
+PARTICIPLE_RULES = list(load_resource('./', 'part_rules'))
+VERB_RULES = list(load_resource('./', 'verb_rules'))
 
 
 LEMMA_INDEX = {'adj': ADJECTIVES, 'adv': ADVERBS, 'noun': NOUNS,

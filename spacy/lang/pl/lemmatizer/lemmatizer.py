@@ -34,7 +34,6 @@ class PolishLemmatizer(object):
         else:
             return [self.lookup(string)]
 
-        # TODO check if is base form
 
         exceptions = self.exc.get(univ_pos, {}).copy()
         exceptions.update(self.exc.get('other', {}))
