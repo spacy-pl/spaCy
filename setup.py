@@ -170,13 +170,13 @@ def chdir(new_dir):
         del sys.path[0]
         os.chdir(old_dir)
 
-def binarize_jsonl_data(root, files):
+def binarize_jsonl_data(root, paths):
     """Converting jsonl language data to messagepack files to reduce package size"""
-    for filename in files:
+    for filepath in paths:
         assert(filename.endswith(".jsonl"))
-        print("Converting {}".format(filename))
-        input_filepath = os.path.join(root, filename)
-        output_filepath = os.path.join(root, filename[:-6]+".msg")
+        print("Converting {}".format(filepath))
+        input_filepath = os.path.join(root, filepath)
+        output_filepath = os.path.join(root, filepath[:-6]+".msg")
 
         data = list(srsly.read_jsonl(input_filepath))
         srsly.write_msgpack(output_filepath, data)
